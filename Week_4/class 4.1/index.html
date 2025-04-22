@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">   
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sum and Interest Calculator</title>
+        <script>
+            async function populateDiv(){
+                // alert("You clicked the button");
+                // Document
+                // const element = document.getElementById("finalSum")
+                // // console.log(element); // This will give you a DOM object.
+                // element.innerHTML = "Hello World";
+                
+                // ASSIGNMENT -
+
+                // const a = document.getElementById("firstNumber").value;
+                // const b = document.getElementById("secondNumber").value;
+                // const element = document.getElementById("finalSum");
+                // element.innerHTML = parseInt(a) + parseInt(b);
+    
+                // had to use parseInt which converts string to a number because a and b are strings and "1" + "1" = "11" in JavaScript.
+    
+                // .innerHTML ==> This is a property that lets you change the content of an element.
+    
+                // document.querySelector("#finalSum") ==> This is another way to select an element.
+    
+                // document.querySelector("div") ==> This will select the first div element in the document.
+    
+                // document.querySelectorAll("div") ==> This will select all the div elements in the document.
+    
+                // document.getElementsByClassName("container") ==> This will select all the elements with the class name "container". It will give an array of those elements.
+
+                const a = document.getElementById("firstNumber").value;
+                const b = document.getElementById("secondNumber").value;
+                
+                // FETCH
+
+                // fetch("http://localhost:3000/sum?a=" + a + "&b=" + b)
+                //     .then(function(response) {
+                //         // console.log(response); // A response object
+                //         response.text()
+                //             .then(function(ans) {
+                //                 document.getElementById("finalSum").innerHTML = ans;
+                //             })
+                //     })
+
+                const response = await fetch("http://localhost:3000/sum?a=" + a+ "&b=" + b);
+                const sum = await response.text();
+
+                const element = document.getElementById("finalSum");
+                element.innerHTML = sum;
+            }
+
+            async function getInterest(){
+                const p = document.getElementById("principal").value;
+                const r = document.getElementById("rate").value;
+                const t = document.getElementById("time").value;
+
+                const response = await fetch("http://localhost:3000/interest?principal=" + p+ "&rate=" + r + "&time=" + t);
+                const finalData = await response.json();
+
+                const amt = finalData.total;
+                const interest = finalData.interest;
+
+                document.getElementById("finalInterest").innerHTML = "Amount is : "+ amt + "<br>" + "Interest is : " + interest;
+            }
+
+            // DEBOUNCING
+            // It is a technique to limit the rate at which a function is called. It ensures the function runs only after a certain amount of delay has passed since the last time it was called.
+            // e.g., when you type in a search bar, the search results are shown only after you stop typing for a certain amount of time.
+
+            let timeout;
+            
+            function debouncePopulateDiv(){
+                // delay the call to populateDiv until i've not been called for 100ms
+                // and I've been called atleast once
+                // Now what you neeed to do is to ensure that every time this clock is called within a 100 ms of it being last called, you should reset it again.
+                clearTimeout(timeout);
+                timeout = setTimeout(populateDiv, 1000);
+
+                // setTimeout immediately returns a unique id for the timeout that you can use to clear it. (while the function is still running)
+
+            }
+        </script> 
+    </head>
+    <body>
+        <h3>Enter First Number</h3>
+        <input oninput="debouncePopulateDiv()" id="firstNumber" type="number" placeholder="First Number">
+        <br>
+        <h3>Enter Second Number</h3>
+        <input oninput="debouncePopulateDiv()" id="secondNumber" type="number" placeholder="Second Number">
+        <br>
+        <br>
+        <!-- <button onclick="populateDiv()">
+            Calculate Sum
+        </button> -->
+        <br>
+        <br>
+        <div id = "finalSum">
+
+        </div>
+
+        <!-- HARDER ASSIGNMENT -->
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <h3>Enter the Principal Amount</h3>
+        <input id="principal" type="number" placeholder="Principal amount">
+        <br>
+
+        <h3>Enter the Rate Percentage</h3>
+        <input id="rate" type="number" placeholder="Rate Percentage">
+        <br>
+
+        <h3>Enter the Time</h3>
+        <input id="time" type="number" placeholder="Time in years">
+        <br>
+        <br>
+        <button onclick="getInterest()">Calculate Interest</button>
+        <br>
+        <br>
+        <div id="finalInterest">
+
+        </div>
+    </body>
+</html>
+
+

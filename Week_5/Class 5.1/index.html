@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter app using state and components</title>
+</head>
+<body>
+    <div id="buttonParent">
+    </div>
+    <script>
+        // STATE
+        let state = {
+            count : 0
+        }
+
+        // RE-RENDER
+        function buttonComponentReRender() {
+            document.getElementById("buttonParent").innerHTML = "";
+            const component = buttonComponent(state.count);
+            console.log(component);
+            document.getElementById("buttonParent").appendChild(component);
+            
+        }
+        // COMPONENT
+        function onButtonPress(){
+            state.count++;
+            buttonComponentReRender();
+        }
+        function buttonComponent(count){
+            const button = document.createElement("button");
+            button.innerHTML = `Counter ${state.count}`;
+            button.setAttribute("onclick" , "onButtonPress()");
+            return button;
+        }
+
+        buttonComponentReRender()
+
+
+        // When you'll be working with react, then you'll only have to write the state and its components. The re-rendering on DOM is taken care by react.
+
+        // It is important to notice that re-renders here are happening by first removing the previous button and then adding the new button. This is not the best way to do it. We'll learn a better way to do it in the next class. 
+        // Virtual DOM helps us find the difference between the previous and the new DOM and only update the difference. This is a very efficient way to update the DOM.
+
+
+        // Also, if you place this script before the div, then you'll get an error because the div is not present when the script is executed. This happens because html files are executed from top to bottom. So, always place the script at the end of the body tag.
+    </script>
+</body>
+</html>

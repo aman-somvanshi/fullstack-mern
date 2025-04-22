@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "name": "7.4-backend",
+  "version": "1.0.0",
+  "description": "This is a backend for 7.4-easy-bits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aman Somvanshi",
+  "license": "ISC"
+}

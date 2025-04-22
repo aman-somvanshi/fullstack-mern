@@ -1,0 +1,122 @@
+<!-- Let's try to create TODO Application using DOM Manipulation-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A TODO Application</title>
+    
+</head>
+<body>
+    <h3>Title for TODO</h3>
+    <br>
+
+    <input type ="text" id="title" placeholder="Give a title to your task">
+    <br>
+    <br>
+
+    <h4>Description for TODO</h4>
+    <br>
+
+    <input type="text" id="description" placeholder="Give a description for task">
+    <br>
+    <br>
+
+    <!-- <button onclick="addTodo()" id="addTodo"> Add todo </button>
+    <br>
+    <br> -->
+
+    <div id="container"></div>
+
+    <script>
+        // let globalId = 1;
+        // function addTodo(){
+        //     const title=document.getElementById("title").value;
+        //     const description = document.getElementById("description").value;
+        //     // Using innerHTML like we did in the previous class is helpful only when you want to overwrite the content of an element.
+        //     // In this case, we want to append the content of the element. So innerHTML isn't the best choice.
+
+        //     // METHOD - 1
+        //     // const originalHTML = document.getElementById("container").innerHTML;
+        //     // document.getElementById("container").innerHTML = originalHTML + 
+        //     // `
+        //     // <div>
+        //     //     <div>${title}</div>
+        //     //     <div>${description}</div>
+        //     //     <button>Mark as done</button>
+        //     // </div>
+        //     // `
+
+        //     // METHOD - 2
+
+        //     // const childDiv = document.createElement("div"); // This creates : <div></div> which is not yet added to the DOM. It is just created in the memory.
+
+        //     // childDiv.innerHTML = title;
+
+        //     // document.getElementById("container").appendChild(childDiv); // This will add the div to the DOM.
+
+            
+        //     document.getElementById("container").appendChild(createChild(title, description, globalId++));
+
+        // }
+
+
+        function createChild(title, description, id){
+            const child = document.createElement("div");
+
+            const firstGrandChild = document.createElement("div");
+            firstGrandChild.innerHTML = title;
+
+            const secondGrandChild = document.createElement("div");
+            secondGrandChild.innerHTML = description;
+
+            const thirdGrandChild = document.createElement("button");
+            thirdGrandChild.innerHTML = "Mark as done";
+            thirdGrandChild.setAttribute("onclick", `markAsDone(${id})`)
+
+            child.appendChild(firstGrandChild);
+            child.appendChild(secondGrandChild);
+            child.appendChild(thirdGrandChild);
+
+            child.setAttribute("id", id);
+
+            return child;
+        }
+
+        // function markAsDone(id){
+        //     const parent = document.getElementById(id);
+        //     parent.children[2].innerHTML = "Done !"; // This line will change the ----> <button>Mark as done</button> to <button> Done !</button>
+        // }
+
+
+
+        // Some Constraints -
+        // State will always be an array of objects.
+        // every element of state would have a title, description and id.
+
+        function updateDomAccToState(state) {
+            // Two steps -
+            // 1. Clear the parent element
+            // 2. Place the updatedTodo on every element
+            const parent = document.getElementById("container");
+            parent.innerHTML="";
+            for(let i=0;i<state.length;i++){
+                const child = createChild(state[i].title, state[i].description, state[i].id);
+                parent.appendChild(child);
+            }
+        }
+
+        window.setInterval(async function (){
+            const response = await fetch("http://localhost:3000/todos")
+            const finalData = await response.json();
+            updateDomAccToState(finalData);
+        }, 5000);
+
+        // Problem with the above approach is that it is first creating an empty screen every 5 seconds and then updating it. This is not a good approach.
+        // What if the backend returned the same state then it's useless to clear the screen and then update it with the same data.
+
+        // Better approach would be to calculate the difference between the current state and the new state and then update the respective elements.
+        // This is done by remembering the old todos in a variable (Virtual DOM).
+    </script>
+</body>
+</html>
