@@ -48,14 +48,7 @@
 
 // npm install recoil
 
-// Things to learn -  
-// RecoilRoot 
-// atom 
-// useRecoilState 
-// useRecoilValue 
-// useSetRecoilState 
-// selector
-
+// Things to learn -
 
 // useRecoilState - is exactly the same as useState. It returns an array with two elements. The first element is the state variable and the second element is a function to update the state variable.
 
@@ -66,6 +59,13 @@
 // useSetRecoilState - Update State Without Re-Rendering
 // 🔹 Returns only the setter function.
 // 🔹 Component doesn’t re-render when state updates (improves performance).
+
+// Note - 
+// ✅ A component re-renders when:
+// It reads a Recoil value (useRecoilValue(atom) or useRecoilState(atom)).
+
+// ❌ A component does NOT re-render when:
+// It writes to Recoil (useSetRecoilState) but doesn't read — this does not trigger a re-render for the writing component.
 
 
 // <RecoilRoot> - Anything that uses Recoil logic should be wrapped in RecoilRoot. 

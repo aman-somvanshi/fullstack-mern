@@ -9,7 +9,7 @@
 */
 
 // todos here is an array of objects
-export function Todos({todos}) {
+export function Todos({todos}) { // {todos} is used instead of props.todos to make the syntax easier. It is called object destructuring.
     return <div>
         {/* Let's iterate over the todos array using the map function */}
         {todos.map(function (todo) { // todo here is a single object from the todos array

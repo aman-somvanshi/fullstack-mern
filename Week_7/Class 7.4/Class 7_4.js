@@ -1,4 +1,4 @@
-// Atom - similar to useState hook
+// Atom - similar to useState in React, but it is global and can be accessed from any component in the app.
 // An atom is the most smallest unit of state that you can store
 
 //RecoilRoot - this component must wrap every component that uses a recoil hook
@@ -15,6 +15,9 @@
 // Selector -- A selector is something that can be derived from other atoms or selectors. It is similar to useMemo.
 // It is something that does not depend on any other external source or backend.
 
+// useMemo is like a local calculator: “If my inputs haven’t changed, I won’t recalculate.”
+
+// selector is like a global calculator: “If any atom I depend on hasn’t changed, I won’t recalculate — and I’ll keep this available globally.”
 
 // Selector syntax
 
@@ -34,9 +37,27 @@
 
 // use 7.4-backend folder for the server
 // Asynchronous data queries
-//  the default value of an atom must have a synchronous object or a selector which can be asynchronous. (basically, you can put the fetch logic there)
-// But this will cause an intial white screen which can be fixed with a loader
+// the default value of an atom must have a synchronous object. So a selector is used for asynchronous object (basically, you can put the fetch logic there)
 
+// ❌ Don't follow
+// atom({
+//   key: 'user',
+//   default: fetchUserFromAPI(), // ❌ async not allowed
+// });
+
+// ✅ Do follow
+// const userSelector = selector({
+//   key: 'userSelector',
+//   get: async () => {
+//     const res = await fetch('/api/user');
+//     const data = await res.json();
+//     return data;
+//   },
+// });
+
+// But this will cause an intial white screen which can be fixed with a loader
+// You can fix the white screen by using React Suspense:
+// ✅ Wrap the component inside a Suspense and provide a fallback loader:
 
 
 // atomFamily
