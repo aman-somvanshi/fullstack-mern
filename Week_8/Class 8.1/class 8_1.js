@@ -128,7 +128,7 @@
 
 // PART - 2
 
-// Storybook - A tool for developing UI components in isolation for React, Vue, and Angular. It does not requir you to run the full app.
+// Storybook - A tool for developing UI components in isolation for React, Vue, and Angular. It does not require you to run the full app.
 // It is helpful when we don't want to open source the complete codebase, but want to share the components with others.
 
 // Storybook is a place where we can look at all the components. It allows us to develop stories for each component, which are basically different states of the component. For example, a button can have different states like primary, secondary, disabled, etc. Storybook allows us to develop these states in isolation, without having to run the complete application.
@@ -159,3 +159,7 @@
 // On the other hand, Tailwind is very verbose and requires you to write a lot of classes, but it gives you complete control over the styles. You can easily customize the styles to match your own design system, and it is very easy to override the styles of Tailwind components.
 
 // Vercel uses Tailwind, shadcn and Radix UI to build their components.
+
+// Figma Link - https://www.figma.com/design/1QTpfgcJLng3SEHv3V7Nr4/Payouts-V2---2023?t=gfTG3rfXICUZ8Yei-0
+
+// Tailwind Cheat Sheet - https://www.creative-tim.com/twcomponents/cheatsheet
