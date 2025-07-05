@@ -97,3 +97,7 @@
 // A session is like a transaction wrapper.
 // It ensures grouped operations are safe and consistent.
 // You must pass the session object into each operation to include it in the transaction.
+
+
+
+// For the frontend part , refer to class 8_4.js

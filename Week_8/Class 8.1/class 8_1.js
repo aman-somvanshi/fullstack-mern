@@ -163,3 +163,8 @@
 // Figma Link - https://www.figma.com/design/1QTpfgcJLng3SEHv3V7Nr4/Payouts-V2---2023?t=gfTG3rfXICUZ8Yei-0
 
 // Tailwind Cheat Sheet - https://www.creative-tim.com/twcomponents/cheatsheet
+
+
+// You must not forget to add 
+// @import "tailwindcss"; 
+// in the index.css file of your project

@@ -145,10 +145,11 @@ userRouter.put("/" , authMiddleware, async (req, res) => {
 
 
 
-userRouter.get("/bulk", async (req, res) => {
+userRouter.get("/bulk", authMiddleware, async (req, res) => {
     const filter = req.query.filter || "";
 
     const allUsers = await User.find({
+        _id: { $ne: req.userId },  // exclude the current user
         $or: [
             { firstName: {
                 '$regex' : filter,
