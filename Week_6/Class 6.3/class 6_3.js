@@ -1,5 +1,7 @@
 // Reconciliation
 
+const { useState, useRef } = require("react");
+
 // It is the process of taking the new state, finding the diff between the new state and the existing state, reconciling what the DOM should look like right now, and then putting things onto the DOM.
 
 // Can you do DOM manipulation yourself - Yes 
@@ -56,3 +58,22 @@
 // useRef is used when you want to have access to a variable across renders which is not a state variable.
 
 // You can use useRef to store a variable that is neither a global variable nor a state variable but is required to persist across renders.
+
+
+
+
+// useState vs useRef
+
+// 🔹 Use useState when UI or logic depends on the value. It is used when something on the UI needs to be changed.
+// 🔹 Use useRef when you just need to remember something across renders (without triggering re-renders). e.g., value of timeout is needed to persist across renders but shouldn't cause a render if it's value changes. useRef changes don’t update the UI
+
+
+// e.g.,
+// import { useRef } from "react";
+// const myRef = useRef(initialValue);
+// It returns: { current: initialValue }
+
+// You can read/write myRef.current directly.
+
+// Unlike useState, updating useRef doesn’t cause a re-render.
+
