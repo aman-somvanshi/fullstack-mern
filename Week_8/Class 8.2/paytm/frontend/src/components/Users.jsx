@@ -3,21 +3,28 @@ import { Button } from "./Button"
 import { useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 export function Users() {
 
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
 
-
-    // Add debouncing here
-    useAsyncEffect( async () => {
+    async function sendRequest(){
         const response = await axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         });
         setUsers(response.data.user);
+    }
+
+    const timeoutRef = useRef(null);
+
+
+    useAsyncEffect( async () => {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(sendRequest, 1000);
     }, [filter]);
 
     return (
