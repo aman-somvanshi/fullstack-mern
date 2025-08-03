@@ -52,7 +52,8 @@
 
 
 
-// On AWS EC2, HTTP = port 80, HTTPS = port 443, and you must manually open these ports in the Security Group to receive traffic.
+// On AWS EC2, SSH = port 22, HTTP = port 80, HTTPS = port 443, and you must manually open these ports in the Security Group to receive traffic.
+// Note - If you don't write the port number in the URL, it will automatically use port 80 for HTTP and port 443 for HTTPS.
 
 
 //  1. Standard Web Access (Globally Recognized Ports)
@@ -112,6 +113,23 @@
 // 4. Install Node.js
 // 💡
 // https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
+
+
+// Commands for nvm installation (for node.js installation)-
+
+// 1. sudo apt-get update
+
+// 2. sudo apt install curl
+
+// 3. curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+// 4. export NVM_DIR="$HOME/.nvm"
+// [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+// [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+// 5. nvm install node
+
+
 // 5. Install all dependencies
 // cd sum-server
 // npm install
@@ -250,3 +268,7 @@
 
 // EC2 is like hotel and ports are like rooms of the hotel and reverse proxy acts as a hotel manger for the urls and direct them to their respective room
 // NGNIX is like a hotel manager who manages the request and redirect to their respective rooms and also hides the rooms(port number under the hotel name so if anyone wants to visit you you can give your hotel name and manager will redirect the guest to your room automatically
+
+
+
+// We didn't do app.listen(80) in the express code because then we would have been able to run only a single process on the server.
