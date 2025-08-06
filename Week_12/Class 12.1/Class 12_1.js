@@ -1,6 +1,6 @@
 // How to deploy Frontends to AWS
 
-// Usually, people deploy frontends on vercel, but it comes costly at large scale. THen AWS, comes into the picture.
+// Usually, people deploy frontends on vercel, but it comes costly at large scale. Then AWS, comes into the picture.
 
 
 // New things we will learn include
@@ -26,7 +26,7 @@
 // Storage
 // Never store an object in a conventional database.
 
-// These objects are stored in object stores. For exmaple, AWS S3 -> Simple Storage 3.
+// These objects are stored in object stores. For exmaple, AWS S3 -> Simple Storage Service.
 
 // In AWS, a bucket is like a folder where you store your files on the cloud using S3.
 
@@ -214,4 +214,4 @@
 // You might have to invalidate cache to see this in action.
 
 // In AWS CloudFront, "invalidate cache" means removing specific files from CloudFront's edge locations (i.e., the CDN cache), so that the next time a user requests those files, CloudFront fetches the latest version from the origin server (like S3, EC2, etc.).
-// You get up to 1,000 free invalidation paths per month.
+// You get up to 1,000 free invalidation paths per month.t
