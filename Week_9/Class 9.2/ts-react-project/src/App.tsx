@@ -28,4 +28,15 @@ function Todo(props: TodoProp) {
     )
 }
 
+
+// function Todo({ title, description, done = false }: TodoProp) {
+//   return (
+//     <div>
+//       <h1>{title}</h1>
+//       <h2>{description}</h2>
+//       <h3>Done - {done ? 'Yes' : 'No'}</h3>
+//     </div>
+//   );
+// }
+
 export default App
