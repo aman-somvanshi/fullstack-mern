@@ -1,0 +1,24 @@
+{
+	"name": "falling-meadow-5896",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"test": "vitest",
+		"cf-typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"prisma": "^6.16.1",
+		"typescript": "^5.5.2",
+		"vitest": "~3.2.0",
+		"wrangler": "^4.36.0"
+	},
+	"dependencies": {
+		"@prisma/client": "^6.16.1",
+		"@prisma/extension-accelerate": "^2.0.2",
+		"hono": "^4.9.7"
+	}
+}
