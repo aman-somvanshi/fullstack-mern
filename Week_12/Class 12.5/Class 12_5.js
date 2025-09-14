@@ -152,4 +152,4 @@
 
 
 // So the benefit of having a relationship is that -
-// Now you can't add todos for a non-existing user because foreign key rule is violated.f
+// Now you can't add todos for a non-existing user because foreign key rule is violated.

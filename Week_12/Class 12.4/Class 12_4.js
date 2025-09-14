@@ -268,7 +268,7 @@
 // WHERE u.id = YOUR_USER_ID;
 
 
-// Refer to indexedDB.ts for Nodejs code for joins
+// Refer to index.ts for Nodejs code for joins
 
 
 

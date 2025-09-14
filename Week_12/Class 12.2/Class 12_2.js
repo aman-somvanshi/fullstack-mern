@@ -79,7 +79,9 @@
 // - Use `Map` when : You need more flexibility with keys (not just strings or numbers), or you need to maintain the insertion order of your keys. Maps also provide better performance for large sets of data, especially when frequently adding and removing key-value pairs.
 
 
-
+// 👉 In short:
+// Use Record when you want type safety and know all keys ahead of time.
+// In Map, Keys: Can be any type (string, number, object, function, etc.) and there are built-in methods like set, get, has, delete, forEach and want to preserve insertion order.
 
 
 

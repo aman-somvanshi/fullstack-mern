@@ -241,6 +241,18 @@ a[0] = 5; // Typescript allows this
 //     } 
 // }
 
+// Another example,
+// type Role = "admin" | "user" | "guest";
+
+// const users: Record<Role, string> = {
+//   admin: "Alice",
+//   user: "Bob",
+//   guest: "Charlie",
+// };
+
+// Here, users must have exactly admin, user, and guest keys. If you miss one, TypeScript complains.
+
+
 
 
 // Maps
