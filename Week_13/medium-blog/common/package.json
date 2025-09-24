@@ -1,0 +1,15 @@
+{
+  "name": "@aman_somvanshi/medium-blog-common",
+  "version": "1.0.1",
+  "main": "dist/zod.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "zod": "^4.1.9"
+  }
+}

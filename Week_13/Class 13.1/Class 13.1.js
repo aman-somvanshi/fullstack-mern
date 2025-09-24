@@ -1,3 +1,6 @@
+// This file contains both - Class 13.1 and Class 13.3 . 13.2 was an AMA.
+// This file is about building the backend of our medium blog application. 
+
 // Step 1 - The Stack
 
 
@@ -102,7 +105,13 @@
 // [vars]
 // DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNTM2M2U5ZjEtNmNjMS00MWNkLWJiZTctN2U4NzFmMGFhZjJmIiwidGVuYW50X2lkIjoiY2I5OTE2NDk0MzFkNWZmZWRmNmFiYzViMGFlOTIwYzFhZDRjMGY5MTg1ZjZiNDY0OTc3MzgyN2IyMzY2OWIwMiIsImludGVybmFsX3NlY3JldCI6Ijc0NjE4YWY2LTA4NmItNDM0OC04MzIxLWMyMmY2NDEwOTExNyJ9.HXnE3vZjf8YH71uOollsvrV-TSe41770FPG_O8IaVgs"
 
-// 💡
+// Don't forget that your prsima CLI pickes up the environment variables from the .env file and your application(index.ts) picks that up from wranfgler.jsonc.
+
+// If you are using a Node.js based edge environment, then the pooled connection will work fine with neon.db pool url.
+// If you are using a different js runtime (such as AWS Lambda or Cloudflare Workers) is when the neon.tech pooled connection might not work.
+
+// The pooled connection that you get from neon.db does not have a bunch of prisma dependencies that the prisma pooled connnection gives.
+
 // You should not have your prod URL committed either in .env or in wrangler.toml to github
 // wranger.toml should have a dev/local DB url
 // .env should be in .gitignore
@@ -144,7 +153,7 @@
 // 5. Migrate your database
 // npx prisma migrate dev --name init_schema
 
-// If in case, the migraation command doesn't work, you should push your code onto an aws machine and then run the command there. Once migration folder is created, you push the entire codebase onto github and then pull it to your local machine.
+// If in case, the migration command doesn't work, you should push your code onto an aws machine and then run the command there. Once migration folder is created, you push the entire codebase onto github and then pull it to your local machine.
 
 // 💡
 // You might face issues here, try changing your wifi if that happens
@@ -276,3 +285,183 @@
 // })
 
 // Ref https://stackoverflow.com/questions/75554786/use-cloudflare-worker-env-outside-fetch-scope
+
+
+
+
+
+
+
+
+
+
+// Step - 7 
+
+// Better routing
+// https://hono.dev/api/routing#grouping
+// Hono let’s you group routes together so you can have a cleaner file structure.
+// Create two new files - 
+// routes/user.ts
+// routes/blog.ts
+// and push the user routes to user.ts
+// index.ts
+// user.ts
+// Blog routes
+// 1. Create the route to initialize a blog/post
+// Solution
+// 2. Create the route to update blog
+// Solution
+// 3. Create the route to get all blogs
+// Solution 
+// 4. Create the route to get a blog
+// Solution
+
+// Ideally, Pagination should be added for the 4th end point. So you return only 10 blogs first , and then if the user asks for more then only return more of them.
+ 
+// Try to hit the routes via POSTMAN and ensure they work as expected
+
+
+// Q- Why the order in which these endpoints are written is imp here?
+
+// Note - Routers usually match endpoints in the order you define them.
+// /:id is a catch-all route — it will match any string after /blogs/.
+// If it comes before /bulk, then:
+// /blogs/bulk will be treated as id = "bulk"
+// The server will never reach the /bulk route.
+
+
+// 🔑 Rule of Thumb
+// Always put more specific routes before dynamic ones.
+// /bulk is specific → goes first.
+// /:id is dynamic → goes after.
+
+
+
+
+
+
+
+
+// Step 8 - Understanding the types
+// Bindings
+// https://hono.dev/getting-started/cloudflare-workers#bindings
+// See Bindings.webp
+
+// In our case, we need 2 env variables - 
+// JWT_SECRET
+// DATABASE_URL
+ 
+// Variables
+// https://hono.dev/api/context#var
+// If you wan’t to get and set values on the context of the request, you can use c.get and c.set
+// You need to make typescript aware of the variables that you will be setting on the context.
+// You can also create a middleware that sets prisma in the context so you don’t need to initialise it in the function body again and again
+
+
+
+
+
+
+
+// Step 9 - Deploy your app
+
+// npx wrangler login
+// npx wrangler whoami
+// npm run deploy
+
+// Update the env variables from cloudflare dashboard
+// Test your production URL in postman, make sure it works
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Step 10 - Zod validation
+// If you’ve gone through the video Cohort 1 - Deploying npm packages, Intro to Monorepos, you’ll notice we introduced type inference in Zod 
+// https://zod.dev/?id=type-inference
+ 
+// This let’s you get types from runtime zod variables that you can use on your frontend
+ 
+// Refer to the image - modules.webp and to the file - zod.ts
+ 
+// We will divide our project into 3 parts
+// Backend
+// Frontend
+// common
+// common will contain all the things that frontend and backend want to share. 
+// We will make common an independent npm module for now. 
+// Eventually, we will see how monorepos make it easier to have multiple packages sharing code in the same repo
+
+
+// So now we create a common folder
+// npm init -y
+// npx tsc --init
+
+// Change rootDir to src and outDir to dist. Also uncomment declaration: true ---> This generates .d.ts files which allow you to ship type definitions too.
+
+// Now create all the zod validation and their respective type definitions that will be used in the frontend. Put all types in `src/index.ts`
+    // 1. signupInput / SignupInput
+    // 2. signinInput / SigninInput
+    // 3. createPostInput / CreatePostInput
+    // 4. updatePostInput / UpdatePostInput
+
+// Update the name in package.json to be in your own npm namespace, Update main to be dist/index.js
+
+// Add src to .npmignore
+
+// Install zod
+// npm i zod
+
+// 1. `tsc -b` to generate the output
+
+// 1. Sign up/login to npmjs.org
+// 2. Run `npm login`
+
+// 3. Publish to npm
+
+// npm publish --access public
+
+// Explore your package on npmjs
+
+
+// We did all this because eventually we are going to have a frontend folder which won't be able to access the zod types from backend folder. So we placed all that code into the common folder. And deployed it as an npm package. So now both backend and frontend folder can access zod types by installing that npm package.
+
+// npm version patch ---> this command is used to update code in an npm package by increasing its version
+
+// Run npm publish --access public
+
+
+
+
+
+
+// What is Promise.all?
+// Promise.all lets you run many promises at the same time and wait until all of them are finished.
+// Think of it like: “I’ll order 3 food items together, and I’ll only start eating when all 3 arrive.” 
+
+// Important Points
+// 1. Parallel execution → faster than waiting one by one.
+
+// 2. Order preserved → results come back as [result1, result2, result3].
+
+// 3. Error behavior → if any promise fails ❌, the whole Promise.all fails.
+
+
+
+
+
+// Note - Databases can handle a limited number of concurrent connections. Each connection requires RAM, which means that simply increasing the database connection limit without scaling available resources:
+
+// ✔ might allow more processes to connect but
+// ✘ significantly affects database performance, and can result in the database being shut down due to an out of memory error
