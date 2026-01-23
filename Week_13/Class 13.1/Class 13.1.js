@@ -404,6 +404,10 @@
 // Eventually, we will see how monorepos make it easier to have multiple packages sharing code in the same repo
 
 
+
+
+// Step 11 - Initialise common
+
 // So now we create a common folder
 // npm init -y
 // npx tsc --init
@@ -442,6 +446,21 @@
 // Run npm publish --access public
 
 
+
+
+
+
+// Step 12 - Import Zod in backend
+// Go to the backend folder
+// cd backend
+
+// Install the package you published to npm
+// npm i your_package_name
+
+// Explore the package
+// cd node_modules/your_package_name
+
+// Update the routes to do zod validation on them
 
 
 

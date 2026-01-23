@@ -122,5 +122,6 @@
 // The connection string for this postgres would be 
 
 // postgresql://postgres:mysecretpassword@localhost:5432/postgres
+// Format - postgresql://<username>:<password>@<host>:<port>/<database>
 
 // Now try running index.js which will connect to the postgres instance you created through docker in your local machine

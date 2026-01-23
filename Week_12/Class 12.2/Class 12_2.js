@@ -52,7 +52,7 @@
 // KeyType → type of the keys (e.g., string, number, or a union like 'name' | 'age')
 // ValueType → type of the values
 
-
+// Record is used to create an object type where keys are predefined and all values follow the same type, improving type safety and maintainability.
 
 
 // Map is a js concept.
